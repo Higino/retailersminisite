@@ -1,7 +1,8 @@
 import React from 'react';
-import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@material-ui/core';
+import { Typography, Button, Card, CardActions} from '@material-ui/core';
 
 import useStyles from './styles';
+import Product from '../../Products/Product/Product';
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const classes = useStyles();
@@ -11,22 +12,36 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
 
   return (
-    <Card className="cart-item">
-      <CardMedia image={item.media.source} alt={item.name} className={classes.media} />
-      <CardContent className={classes.cardContent}>
-        <Typography variant="h4">{item.name}</Typography>
-        <Typography variant="h5">{item.line_total.formatted_with_symbol}</Typography>
-      </CardContent>
+    <Card className="classes.root">
+      <Product product={item}></Product>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>
-          <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}>-</Button>
+          <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, 1)}>-</Button>
           <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
-          <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}>+</Button>
+          <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, 1)}>+</Button>
         </div>
-        <Button variant="contained" type="button" color="secondary" onClick={() => handleRemoveFromCart(item.id)}>Remove</Button>
+        <Button variant="contained" type="button" color="primary" onClick={() => handleRemoveFromCart(item.id)}>Remove</Button>
       </CardActions>
     </Card>
   );
 };
 
 export default CartItem;
+
+// <Card className="classes.root">
+// <CardMedia image={'http://localhost:1337'+item.media[0].formats.small.url} alt={item.name} className={classes.media} />
+// <CardContent >
+// <div className={classes.cardContent}>
+//   <Typography variant="h5">{item.name}</Typography>
+//   <Typography variant="h5">${item.unformated_price/100}</Typography>
+// </div>
+// </CardContent>
+// <CardActions className={classes.cardActions}>
+//   <div className={classes.buttons}>
+//     <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, 1)}>-</Button>
+//     <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
+//     <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, 1)}>+</Button>
+//   </div>
+//   <Button variant="contained" type="button" color="secondary" onClick={() => handleRemoveFromCart(item.id)}>Remove</Button>
+// </CardActions>
+// </Card>

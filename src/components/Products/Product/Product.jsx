@@ -9,19 +9,20 @@ const Product = ({ product, onAddToCart }) => {
 
   const handleAddToCart = () => onAddToCart(product, 1);
 
+  console.log(product)
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image={product.image} title={product.name} />
+      <CardMedia className={classes.media} image={product.thumbnail_url} title={product.name} />
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h2">
             {product.name}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {product.price}
+          <Typography gutterBottom variant="h6" component="h2">
+            ${product.RRP}
           </Typography>
         </div>
-        <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" component="p" />
+        <Typography dangerouslySetInnerHTML={{ __html: product.short_description }} variant="body2" color="textSecondary" component="p" />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton aria-label="Add to Cart" onClick={ () => handleAddToCart(product  , 1)}>
